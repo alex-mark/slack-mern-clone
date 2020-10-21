@@ -1,20 +1,29 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Chat from "./components/Chat";
 
 function App() {
   return (
     <div className="app">
-      <Header />
+      <Router>
+        <Header />
 
-      <div className="app__body">
-        <Sidebar />
-      </div>
+        <div className="app__body">
+          <Sidebar />
 
-      {/* Sidebar */}
-      {/* React-Router */}
-      {/* Chat screen */}
+          <Switch>
+            <Route path="/channel/:channelId">
+              <Chat />
+            </Route>
+            <Route path="/" exact>
+              <h1>Welcome</h1>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

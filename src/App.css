@@ -2,3 +2,7 @@ body {
   --slack-color: #3f0f40;
   --slack-secondary: #49274b;
 }
+
+.app__body {
+  display: flex;
+}
