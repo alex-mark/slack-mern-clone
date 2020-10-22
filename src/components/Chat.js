@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Chat.css";
+import Message from "./Message";
 import db from "../firebase";
 
 function Chat() {
@@ -43,7 +44,16 @@ function Chat() {
         </div>
       </div>
 
-      <div className="chat__messages"></div>
+      <div className="chat__messages">
+        {channelMessages.map(({ message, timestamp, user, userImage }) => (
+          <Message
+            message={message}
+            timestamp={timestamp}
+            user={user}
+            userImage={userImage}
+          />
+        ))}
+      </div>
     </div>
   );
 }
