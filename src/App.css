@@ -3,6 +3,10 @@ body {
   --slack-secondary: #49274b;
 }
 
+.app {
+  height: 100vh;
+}
+
 .app__body {
-  display: flex;
+  height: 100%;
 }
