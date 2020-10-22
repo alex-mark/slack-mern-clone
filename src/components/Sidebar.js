@@ -14,9 +14,12 @@ import AddIcon from "@material-ui/icons/Add";
 import "./Sidebar.css";
 import SidebarOption from "./SidebarOption";
 import db from "../firebase";
+import { useStateValue } from "../StateProvider";
 
 function Sidebar() {
   const [channels, setChannels] = useState([]);
+
+  const [{ user }, _] = useStateValue();
 
   useEffect(() => {
     db.collection("channels").onSnapshot((snapshot) =>
@@ -36,7 +39,7 @@ function Sidebar() {
           <h2>Alex's Slack</h2>
           <h3>
             <FiberManualRecordIcon />
-            Alex Markin
+            {user?.displayName}
           </h3>
         </div>
         <CreateIcon />
