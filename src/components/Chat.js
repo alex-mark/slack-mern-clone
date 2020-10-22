@@ -4,6 +4,7 @@ import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Chat.css";
 import Message from "./Message";
+import ChatInput from "./ChatInput";
 import db from "../firebase";
 
 function Chat() {
@@ -54,6 +55,8 @@ function Chat() {
           />
         ))}
       </div>
+
+      <ChatInput channelName={channelDetails?.name} channelId={channelId} />
     </div>
   );
 }
