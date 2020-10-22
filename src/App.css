@@ -5,8 +5,11 @@ body {
 
 .app {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app__body {
-  height: 100%;
+  display: flex;
+  flex: 1;
 }
