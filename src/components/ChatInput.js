@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import firebase from "firebase";
-import { Button } from "@material-ui/core";
 import "./ChatInput.css";
 import db from "../firebase";
 import { useStateValue } from "../StateProvider";
@@ -31,9 +30,9 @@ function ChatInput({ channelName, channelId }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button type="submit" onClick={sendMessage}>
+        <button type="submit" onClick={sendMessage}>
           Send
-        </Button>
+        </button>
       </form>
     </div>
   );
