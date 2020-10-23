@@ -1,12 +1,11 @@
-# Slack Clone
+# Slack MERN Clone
 
-## [Live App](https://slack-clone-c314b.web.app/)
+<!-- ## [Live App](https://slack-clone-c314b.web.app/) -->
 
 - React, React Context API
 - React Router
 - Realtime chat
 - Google Auth
-- Firebase
 - Flexbox, CSS variables
 
 ## Available Scripts
