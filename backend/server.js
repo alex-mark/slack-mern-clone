@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import Pusher from "pusher";
 
+import mongoData from "./mongoData.js";
+
 // App config
 const app = express();
 const port = process.env.PORT || 9000;
@@ -28,6 +30,11 @@ mongoose.connection.once("open", () => {
 
 // api routes
 app.get("/", (req, res) => res.status(200).send("Hello from Slack Clone api"));
+
+app.post("/new/channel", (req, res) => {
+  const dbData = req.body;
+  // to do
+});
 
 // listen
 app.listen(port, () => console.log(`listening on localhost:${port}`));
