@@ -12,6 +12,19 @@ app.use(cors());
 app.use(express.json());
 
 // db config
+const mongoPass = process.env.MONGO_DB_PASS;
+const dbName = "";
+const mongoURI = `mongodb+srv://admin:${mongoPass}@cluster0.fjifq.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+
+mongoose.connect(mongoURI, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+mongoose.connection.once("open", () => {
+  console.log("DB Connected");
+});
 
 // api routes
 app.get("/", (req, res) => res.status(200).send("Hello from Slack Clone api"));
