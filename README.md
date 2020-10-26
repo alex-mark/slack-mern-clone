@@ -1,6 +1,6 @@
 # Slack MERN Clone
 
-<!-- ## [Live App](https://slack-clone-c314b.web.app/) -->
+## [Live App](https://slack-mern-clone.web.app/)
 
 - React, React Context API
 - React Router
