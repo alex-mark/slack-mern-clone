@@ -9,6 +9,14 @@ import mongoData from "./mongoData.js";
 const app = express();
 const port = process.env.PORT || 9000;
 
+const pusher = new Pusher({
+  appId: "1097225",
+  key: "4d9cb078b8038c8580b1",
+  secret: process.env.PUSHER_SECRET,
+  cluster: "eu",
+  useTLS: true,
+});
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -26,6 +34,22 @@ mongoose.connect(mongoURI, {
 
 mongoose.connection.once("open", () => {
   console.log("DB Connected");
+
+  const changeStream = mongoose.connection.collection("conversations").watch();
+
+  changeStream.on("change", (change) => {
+    if (change.operationType === "insert") {
+      pusher.trigger("channels", "newChannel", {
+        change: change,
+      });
+    } else if (change.operationType === "update") {
+      pusher.trigger("conversation", "newMessage", {
+        change: change,
+      });
+    } else {
+      console.log("Error triggering Pusher");
+    }
+  });
 });
 
 // api routes
