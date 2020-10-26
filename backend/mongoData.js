@@ -4,10 +4,16 @@ const slackSchema = mongoose.Schema({
   channelName: String,
   conversation: [
     {
-      message: String,
-      timestamp: String,
-      user: String,
-      userImage: String,
+      type: new mongoose.Schema(
+        {
+          message: String,
+          user: String,
+          userImage: String,
+        },
+        {
+          timestamps: { createdAt: "timestamp" },
+        }
+      ),
     },
   ],
 });

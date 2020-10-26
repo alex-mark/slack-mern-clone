@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import firebase from "firebase";
 import "./ChatInput.css";
-import db from "../firebase";
 import { useStateValue } from "../StateProvider";
+import axios from "../axios";
 
 function ChatInput({ channelName, channelId }) {
   const [input, setInput] = useState("");
@@ -12,9 +11,9 @@ function ChatInput({ channelName, channelId }) {
     e.preventDefault();
 
     if (channelId) {
-      db.collection("channels").doc(channelId).collection("messages").add({
+      axios.post(`/new/message?id=${channelId}`, {
         message: input,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        // timestamp: Date.now(),
         user: user.displayName,
         userImage: user.photoURL,
       });

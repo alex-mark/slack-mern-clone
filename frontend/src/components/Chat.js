@@ -9,15 +9,21 @@ import axios from "../axios";
 
 function Chat() {
   const { channelId } = useParams();
-  const [channelDetails, setChannelDetails] = useState(null);
+  const [channelName, setChannelName] = useState(null);
   const [channelMessages, setChannelMessages] = useState([]);
+
+  const getConversation = (channelId) => {
+    axios.get(`/get/conversation?id=${channelId}`).then((res) => {
+      setChannelName(res.data.channelName);
+      setChannelMessages(res.data.conversation);
+    });
+  };
 
   useEffect(() => {
     if (channelId) {
-      axios.get(`/get/conversation?id=${channelId}`).then((res) => {
-        setChannelDetails(res.data.channelName);
-        setChannelMessages(res.data.conversation);
-      });
+      getConversation(channelId);
+
+      // real time stuff
     }
   }, [channelId]);
 
@@ -26,7 +32,7 @@ function Chat() {
       <div className="chat__header">
         <div className="chat__headerLeft">
           <h4 className="chat__channelName">
-            <strong>#{channelDetails?.name}</strong>
+            <strong>#{channelName}</strong>
             <StarBorderOutlinedIcon />
           </h4>
         </div>
@@ -49,7 +55,7 @@ function Chat() {
         ))}
       </div>
 
-      <ChatInput channelName={channelDetails?.name} channelId={channelId} />
+      <ChatInput channelName={channelName} channelId={channelId} />
     </div>
   );
 }

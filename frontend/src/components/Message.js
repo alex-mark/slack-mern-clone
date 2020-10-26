@@ -9,7 +9,8 @@ function Message({ message, timestamp, user, userImage }) {
         <h4>
           {user}
           <span className="message__timestamp">
-            {new Date(timestamp?.toDate()).toUTCString()}
+            {/* {new Date(timestamp?.toDate()).toUTCString()} */}
+            {timestamp}
           </span>
         </h4>
         <p>{message}</p>
