@@ -7,7 +7,7 @@ import "./Header.css";
 import { useStateValue } from "../StateProvider";
 
 function Header() {
-  const [{ user }, _] = useStateValue();
+  const [{ user }] = useStateValue();
 
   return (
     <div className="header">
