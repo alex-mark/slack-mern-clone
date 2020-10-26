@@ -5,7 +5,7 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Chat.css";
 import Message from "./Message";
 import ChatInput from "./ChatInput";
-import db from "../firebase";
+import axios from "../axios";
 
 function Chat() {
   const { channelId } = useParams();
@@ -14,17 +14,10 @@ function Chat() {
 
   useEffect(() => {
     if (channelId) {
-      db.collection("channels")
-        .doc(channelId)
-        .onSnapshot((snapshot) => setChannelDetails(snapshot.data()));
-
-      db.collection("channels")
-        .doc(channelId)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) =>
-          setChannelMessages(snapshot.docs.map((doc) => doc.data()))
-        );
+      axios.get(`/get/conversation?id=${channelId}`).then((res) => {
+        setChannelDetails(res.data.channelName);
+        setChannelMessages(res.data.conversation);
+      });
     }
   }, [channelId]);
 

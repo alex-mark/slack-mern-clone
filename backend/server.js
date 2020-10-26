@@ -65,12 +65,17 @@ app.get("/get/channelList", (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
+      // const channels = data.reduce((acc, channel) => {
+      //   acc.push({ id: channel._id, name: channel.channelName });
+      // }, []);
+
       let channels = [];
+      data.map((channelData) => {
+        channels.push({ id: channelData._id, name: channelData.channelName });
+      });
 
-      const channels = data.reduce((acc, channel) => {
-        acc.push({ id: channel._id, name: channel.channelName });
-      }, []);
-
+      console.log(data);
+      console.log(channels);
       res.status(200).send(channels);
     }
   });
@@ -79,7 +84,7 @@ app.get("/get/channelList", (req, res) => {
 app.get("/get/conversation", (req, res) => {
   const id = req.query.id;
 
-  mongoData.find({ _id: id }, (err, data) => {
+  mongoData.findById(id, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
