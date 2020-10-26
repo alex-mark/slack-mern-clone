@@ -36,6 +36,9 @@
   text-align: center;
   min-width: 35vw;
   color: gray;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .header__right {
