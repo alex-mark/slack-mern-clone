@@ -13,23 +13,24 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import "./Sidebar.css";
 import SidebarOption from "./SidebarOption";
-import db from "../firebase";
 import { useStateValue } from "../StateProvider";
+import axios from "../axios";
 
 function Sidebar() {
   const [channels, setChannels] = useState([]);
 
-  const [{ user }, _] = useStateValue();
+  const [{ user }] = useStateValue();
+
+  const getChannelList = () => {
+    axios.get("/get/channelList").then((res) => {
+      setChannels(res.data);
+    });
+  };
 
   useEffect(() => {
-    db.collection("channels").onSnapshot((snapshot) =>
-      setChannels(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-        }))
-      )
-    );
+    getChannelList();
+
+    // real time stuff
   }, []);
 
   return (
