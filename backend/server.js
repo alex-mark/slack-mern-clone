@@ -33,7 +33,59 @@ app.get("/", (req, res) => res.status(200).send("Hello from Slack Clone api"));
 
 app.post("/new/channel", (req, res) => {
   const dbData = req.body;
-  // to do
+
+  mongoData.create(dbData, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.post("/new/message", (req, res) => {
+  const id = req.query.id;
+  const newMessage = req.body;
+
+  mongoData.update(
+    { _id: id },
+    { $push: { conversation: newMessage } },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(data);
+      }
+    }
+  );
+});
+
+app.get("/get/channelList", (req, res) => {
+  mongoData.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      let channels = [];
+
+      const channels = data.reduce((acc, channel) => {
+        acc.push({ id: channel._id, name: channel.channelName });
+      }, []);
+
+      res.status(200).send(channels);
+    }
+  });
+});
+
+app.get("/get/conversation", (req, res) => {
+  const id = req.query.id;
+
+  mongoData.find({ _id: id }, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 // listen
