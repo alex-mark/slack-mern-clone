@@ -27,7 +27,7 @@ function App() {
                   <Chat />
                 </Route>
                 <Route path="/" exact>
-                  <h1>Welcome</h1>
+                  <h1>Welcome to Slack Clone</h1>
                 </Route>
               </Switch>
             </div>
