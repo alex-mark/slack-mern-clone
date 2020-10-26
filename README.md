@@ -1,11 +1,24 @@
 # Slack MERN Clone
 
-## [Live App](https://slack-mern-clone.web.app/)
+## [Try it Live](https://slack-mern-clone.web.app/)
 
-- React, React Context API
+## Frontend
+
+- React
+- React Context API
 - React Router
+- Material UI
 - Realtime chat
 - Google Auth
+- Firebase Hosting
 - Flexbox, CSS variables
 
-[API](https://slack-mern-clone-alex.herokuapp.com/)
+## Backend
+
+- Express JS
+- Mongo DB
+- Pusher JS (for realtime chat)
+- Heroku Hosting (Express)
+- MongoDB Cloud + AWS for hosting & managing database
+
+[API URL](https://slack-mern-clone-alex.herokuapp.com/)
