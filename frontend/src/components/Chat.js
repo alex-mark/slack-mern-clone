@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import Pusher from "pusher-js";
 import "./Chat.css";
 import Message from "./Message";
 import ChatInput from "./ChatInput";
 import axios from "../axios";
+
+const pusher = new Pusher("4d9cb078b8038c8580b1", {
+  cluster: "eu",
+});
 
 function Chat() {
   const { channelId } = useParams();
@@ -23,7 +28,11 @@ function Chat() {
     if (channelId) {
       getConversation(channelId);
 
-      // real time stuff
+      // TO-DO change to pushing only new message
+      const channel = pusher.subscribe("conversation");
+      channel.bind("newMessage", function (data) {
+        getConversation(channelId);
+      });
     }
   }, [channelId]);
 

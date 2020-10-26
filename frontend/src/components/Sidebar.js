@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Pusher from "pusher-js";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
@@ -16,6 +17,10 @@ import SidebarOption from "./SidebarOption";
 import { useStateValue } from "../StateProvider";
 import axios from "../axios";
 
+const pusher = new Pusher("4d9cb078b8038c8580b1", {
+  cluster: "eu",
+});
+
 function Sidebar() {
   const [channels, setChannels] = useState([]);
 
@@ -30,7 +35,11 @@ function Sidebar() {
   useEffect(() => {
     getChannelList();
 
-    // real time stuff
+    // TO-DO change to pushing only new channel
+    const channel = pusher.subscribe("channels");
+    channel.bind("newChannel", function (data) {
+      getChannelList();
+    });
   }, []);
 
   return (
